@@ -2,7 +2,6 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-// [PENS REQUIREMENT]: Maksa objek ini punya AudioSource
 [RequireComponent(typeof(AudioSource))] 
 public class Enemy : MonoBehaviour
 {
@@ -14,19 +13,20 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Slider healthSlider;
 
     [Header("Audio Settings (Modular)")]
-    [SerializeField] private AudioClip hitSound; // Suara pas kena garpu
+    [SerializeField] private AudioClip hitSound; 
 
     private float _currentHealth;
     private float _moveSpeed;
-    private AudioSource _audioSource; // Variabel AudioSource modular
+    private float _baseSpeed;
+    private float _slowTimer;
+    private bool _isSlowed;
+    private AudioSource _audioSource; 
 
     public float MoveSpeed => _moveSpeed;
 
     private void Awake()
     {
-        // [FIX BUMBU PENS]: Cari component AudioSource di objek ini
         _audioSource = GetComponent<AudioSource>();
-        // Matiin Play On Awake biar kaga teriak pas spawn
         if (_audioSource != null) _audioSource.playOnAwake = false;
     }
 
@@ -34,7 +34,8 @@ public class Enemy : MonoBehaviour
     {
         if (data == null) return;
         _currentHealth = data.lives * (1f + waveIndex * 0.2f);
-        _moveSpeed = data.speed;
+        _baseSpeed = data.speed;
+        _moveSpeed = _baseSpeed;
         
         if (healthSlider != null)
         {
@@ -43,18 +44,38 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    public void ApplySlow(float slowAmount, float duration)
+    {
+        // --- CONSOLE LOG TOWER LEM ---
+        Debug.Log($"<color=yellow>[TOWER LEM]</color> Musuh {gameObject.name} TERKENA SLOW! Speed turun ke: {1f - slowAmount}%");
+
+        _moveSpeed = _baseSpeed * (1f - slowAmount);
+        _slowTimer = duration;
+        _isSlowed  = true;
+    }
+
+    private void Update()
+    {
+        if (!_isSlowed) return;
+
+        _slowTimer -= Time.deltaTime;
+        if (_slowTimer <= 0)
+        {
+            Debug.Log($"<color=white>[SYSTEM]</color> Efek Slow pada {gameObject.name} SELESAI.");
+            _moveSpeed = _baseSpeed; 
+            _isSlowed  = false;
+        }
+    }
+
     public void TakeDamage(float amount)
     {
         _currentHealth -= amount;
         if (healthSlider != null) healthSlider.value = _currentHealth;
 
-        // --- LOGIKA modular AUDIO PAS KENA HIT ---
         if (_audioSource != null && hitSound != null)
         {
-            // Pake PlayOneShot biar suaranya tumpuk-tumpuk kalau kena hit beruntun
             _audioSource.PlayOneShot(hitSound); 
         }
-        // ----------------------------------------
 
         if (_currentHealth <= 0)
         {
@@ -71,13 +92,13 @@ public class Enemy : MonoBehaviour
 
     private void Die()
     {
-        // [FIX PENS]: Bersihin garpu yang nancep biar kaga melayang
         Projectile[] attachedProjectiles = GetComponentsInChildren<Projectile>(true);
         foreach (Projectile proj in attachedProjectiles)
         {
             proj.gameObject.SetActive(false); 
         }
 
+        _isSlowed = false; // Reset state biar pool kaga glitch
         gameObject.SetActive(false);
     }
 }

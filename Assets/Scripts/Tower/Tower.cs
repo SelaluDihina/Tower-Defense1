@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))] // Paksa tower punya AudioSource
 public class Tower : MonoBehaviour
 {
     [Header("Settings")]
@@ -9,13 +10,25 @@ public class Tower : MonoBehaviour
     [Range(0.01f, 2f)]
     [SerializeField] private float projectileScale = 0.05f;
 
+    [Header("Audio (Fix Suara Kepotong)")]
+    [SerializeField] private AudioClip shootSound; // Drag suara piso/lem/garpu ke sini
+
     private List<Enemy> _enemiesInRange = new List<Enemy>();
     private ObjectPooler _projectitlePool;
+    private AudioSource _audioSource;
     private float _shootTimer;
 
     private void Start()
     {
         _projectitlePool = GetComponent<ObjectPooler>();
+        _audioSource = GetComponent<AudioSource>();
+        
+        // Setup AudioSource biar kaga ganggu game
+        if (_audioSource != null) {
+            _audioSource.playOnAwake = false;
+            _audioSource.spatialBlend = 0f; // Set ke 2D biar jernih di kuping
+        }
+
         if (data != null) _shootTimer = data.shootInterval;
     }
 
@@ -41,7 +54,6 @@ public class Tower : MonoBehaviour
             if (c.CompareTag("Enemy"))
             {
                 Enemy enemy = c.GetComponent<Enemy>();
-                // Cek null + cek duplikat sebelum masukin list
                 if (enemy != null && !_enemiesInRange.Contains(enemy))
                     _enemiesInRange.Add(enemy);
             }
@@ -69,7 +81,6 @@ public class Tower : MonoBehaviour
 
     public void Shoot()
     {
-        // Bersihin musuh yang udah mati, nonaktif, atau kabur dari range
         _enemiesInRange.RemoveAll(e =>
             e == null ||
             !e.gameObject.activeInHierarchy ||
@@ -81,12 +92,15 @@ public class Tower : MonoBehaviour
         Enemy targetEnemy = _enemiesInRange[0];
         if (targetEnemy == null) return;
 
+        // --- LOGIC AUDIO (MAINKAN DI TOWER) ---
+        if (_audioSource != null && shootSound != null) {
+            _audioSource.PlayOneShot(shootSound);
+        }
+
         GameObject projGo = _projectitlePool.GetPooledObject();
         if (projGo == null) return;
 
-        // [FIX UTAMA]: SetParent(null) DULU sebelum set posisi
-        // Kalau peluru masih jadi child tower waktu di-set posisi,
-        // scale tower (0.05f) ngefek ke world position peluru → peluru loncat ke posisi aneh
+        // [FIX UTAMA LU]: Tetap gue jaga, Riz. Jangan sampe loncat lagi posisinya.
         projGo.SetActive(false);
         projGo.transform.SetParent(null);
         projGo.transform.position = new Vector3(transform.position.x, transform.position.y, -1f);

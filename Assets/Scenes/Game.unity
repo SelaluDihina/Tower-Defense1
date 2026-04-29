@@ -5132,7 +5132,6 @@ MonoBehaviour:
   biasaPool: {fileID: 1188566034}
   lincahPool: {fileID: 482424467}
   rajaPool: {fileID: 1473608581}
-  _currentWaveIndex: 0
 --- !u!4 &854968814
 Transform:
   m_ObjectHideFlags: 0

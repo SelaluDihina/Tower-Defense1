@@ -2,11 +2,14 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    [Header("Modular Visual Adjustments (Hard Mode PENS)")]
-    // [PENTING RIZ!]: Tweak angka ini di Inspector Prefab Peluru lu.
-    // Jangan diubah di kode, tapi di Unity! Misal isi -90, 90, atau 180.
-    // Tujuannya biar ujung garpunya beneran hadap depan pas terbang.
+    [Header("Modular Visual")]
     [SerializeField] private float rotationOffset = 0f;
+
+    [Header("Tower Lem Settings")]
+    [SerializeField] private bool isGlueProjectile = false; // Checklist ini di Prefab Tower Lem!
+    [SerializeField] private float slowAmount = 0.5f;
+    [SerializeField] private float slowDuration = 2f;
+    [SerializeField] private float splashRadius = 1.5f; // Radius area Lem
 
     private Transform _target;
     private TowerData _data;
@@ -19,41 +22,74 @@ public class Projectile : MonoBehaviour
 
     void Update()
     {
-        // 1. Cek Target (Kalau mati/ilang, peluru harus mati)
         if (_target == null || !_target.gameObject.activeInHierarchy)
         {
-            gameObject.SetActive(false); // Balik ke Pool
+            gameObject.SetActive(false); 
             return;
         }
 
-        // --- 2. LOGIKA modular ROKET (HOMING) - Logic tetep ngejar Riz! ---
-        // Kita pake speed dari TowerData (modular). Pastiin di data tower Is Artillery UNCHECK!
         float currentSpeed = (_data != null) ? _data.projectileSpeed : 15f;
         transform.position = Vector2.MoveTowards(transform.position, _target.position, currentSpeed * Time.deltaTime);
 
-
-        // --- 3. LOGIKA modular ROTASI (Arah Ujung Tajam - BIAR NUSUK) ---
-        // Kita hitung arah ke target
         Vector3 direction = _target.position - transform.position;
-        // Cari sudut angle-nya
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
-        // [KUNCI FIX]: Kita tambahin offset biar asset visual sinkron ama kodingan Unity.
-        // Ini TDP Modular Hard Mode!
         transform.rotation = Quaternion.AngleAxis(angle + rotationOffset, Vector3.forward);
 
-
-        // --- 4. DETEKSI TABRAKAN (Direct Hit) ---
-        // Jarak threshold kita buat 0.15 unit
         if (Vector2.Distance(transform.position, _target.position) < 0.15f)
         {
+            HandleHit();
+        }
+    }
+
+    private void HandleHit()
+    {
+        if (isGlueProjectile)
+        {
+            // --- LOGIKA AOE (AREA) LEM ---
+            Debug.Log($"<color=cyan>[AOE]</color> Proyektil Lem Meledak di Area!");
+            
+            // Cari semua musuh di radius splash
+            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, splashRadius);
+            foreach (var col in hitEnemies)
+            {
+                Enemy e = col.GetComponent<Enemy>();
+                if (e != null)
+                {
+                    e.ApplySlow(slowAmount, slowDuration);
+                    e.TakeDamage(_data.damage);
+                }
+            }
+        }
+        else
+        {
+            // Tembakan biasa (Garpu/Piso)
             Enemy enemy = _target.GetComponent<Enemy>();
             if (enemy != null)
             {
-                // [PENS REQUIREMENT]:uses damage dari TowerData (modular)
                 enemy.TakeDamage(_data.damage); 
             }
-            gameObject.SetActive(false); // Balik ke pool (Ilang)
         }
+
+        gameObject.SetActive(false);
     }
+    private AudioSource _audioSource;
+
+void Awake()
+{
+    _audioSource = GetComponent<AudioSource>();
+}
+
+void OnEnable()
+{
+    // RESET STATE & PARENT
+    transform.SetParent(null); 
+
+    // --- PAKSA SUARA BUNYI TIAP KALI MUNCUL ---
+    if (_audioSource != null && _audioSource.clip != null)
+    {
+        _audioSource.Stop(); // Stop dulu kalo ada sisa suara
+        _audioSource.Play(); // Bunyiin lagi dari awal
+        Debug.Log($"<color=green>[AUDIO]</color> {gameObject.name} nembak!");
+    }
+}
 }
