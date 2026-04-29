@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,20 +11,21 @@ public class ObjectPooler : MonoBehaviour
     {
         _pool = new List<GameObject>();
         for (int i = 0; i < poolSize; i++)
-        {
             CreateNewObject();
-        }
     }
 
     private GameObject CreateNewObject()
     {
         if (prefab == null)
         {
-            Debug.LogError("Riz, prefab di ObjectPooler kosong! Seret prefabnya dulu.");
+            Debug.LogError("Prefab di ObjectPooler kosong! Seret prefabnya.");
             return null;
         }
 
-        GameObject obj = Instantiate(prefab, transform);
+        // [FIX UTAMA]: Parent = null → peluru spawn di root scene, bukan child tower
+        // Kalau jadi child tower, scale tower (misal 0.05f) nge-warp world position peluru
+        // dan bikin dia muncul di posisi yang salah waktu di-detach
+        GameObject obj = Instantiate(prefab, null);
         obj.SetActive(false);
         _pool.Add(obj);
         return obj;
@@ -33,17 +33,14 @@ public class ObjectPooler : MonoBehaviour
 
     public GameObject GetPooledObject()
     {
-        // Pake for loop atau foreach, tapi tambahin cek null (obj != null)
-        foreach(GameObject obj in _pool)
+        foreach (GameObject obj in _pool)
         {
-            // Pastiin objeknya masih eksis dan lagi gak aktif
+            // Cek null dulu biar aman kalau ada objek yang ke-destroy
             if (obj != null && !obj.activeInHierarchy)
-            {
-                return obj; 
-            }
+                return obj;
         }
 
-        // Kalau semua peluru lagi dipake atau ada yang hancur, bikin baru
+        // Pool habis? Bikin objek baru (auto-expand)
         return CreateNewObject();
     }
 }

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: TowerGarpu
   m_EditorClassIdentifier: 
   range: 2.5
-  shootInterval: 0.25
-  projectileSpeed: 12
-  projectileDuration: 2
+  shootInterval: 0.2
+  projectileSpeed: 15
+  projectileDuration: 0.5
   damage: 10
   cost: 50
   slowMultiplier: 0.5

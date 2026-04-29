@@ -153,6 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 3cda6b6e538a4e94295dfea934ee4fbf, type: 2}
   healthSlider: {fileID: 329003754477799945}
+  hitSound: {fileID: 8300000, guid: 3a0e302989eeaa24ba07c1c03fb4aa4d, type: 3}
 --- !u!212 &2256493840961879092
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -285,7 +286,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 106
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500

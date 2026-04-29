@@ -139,6 +139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: e3f195a376022844aac2ac0ee1223c27, type: 2}
   healthSlider: {fileID: 4761093680494174069}
+  hitSound: {fileID: 8300000, guid: 3a0e302989eeaa24ba07c1c03fb4aa4d, type: 3}
 --- !u!212 &2256493840961879092
 SpriteRenderer:
   m_ObjectHideFlags: 0

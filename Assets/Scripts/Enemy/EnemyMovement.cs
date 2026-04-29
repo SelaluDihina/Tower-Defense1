@@ -22,9 +22,16 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
+    // Reset index tiap kali keluar dari pool
     void OnEnable()
     {
-        _waypointIndex = 0; // Reset index buat Object Pooler
+        _waypointIndex = 0; // Reset target index
+
+        // [FIX SPAWN]: Paksa posisi tikus ke Waypoint(0) pas baru muncul
+        if (_waypoints != null && _waypoints.Length > 0)
+        {
+            transform.position = _waypoints[0].position;
+        }
     }
 
     void Update()
@@ -32,20 +39,20 @@ public class EnemyMovement : MonoBehaviour
         // 1. Cek apa jalanannya ada
         if (_waypoints == null || _waypointIndex >= _waypoints.Length) return;
 
-        // 2. Tentukan target posisi
+        // 2. Tentukan target posisi waypoint sekarang
         Vector3 targetPos = _waypoints[_waypointIndex].position;
 
-        // 3. LOGIKA BALIK BADAN (Tengok Kanan/Kiri)
-        if (targetPos.x > transform.position.x) 
-        {
-            transform.localScale = new Vector3(-0.1f, 0.1f, 1f); // Ngadep Kanan
-        }
-        else 
-        {
-            transform.localScale = new Vector3(0.1f, 0.1f, 1f); // Ngadep Kiri
-        }
+        // --- 3. LOGIKA modular HADAP (TANPA MJ) ---
+        // Sesuai request lu, kita hapus logic flipping (hadap kiri/kanan).
+        // Kita cuma pake logika rotation dasar biar dia selalu nengok ke target.
+        // Asumsi: Sprite tikus lu aslinya hadap Kanan.
+        Vector3 direction = targetPos - transform.position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        // ------------------------------------------
 
-        // 4. GERAK MENUJU TARGET
+        // 4. GERAK LURUS MENUJU TARGET (Direct Move)
+        // Gerak pake MoveSpeed dari script Enemy yang udah dikali DifficultyScale
         transform.position = Vector2.MoveTowards(transform.position, targetPos, _enemy.MoveSpeed * Time.deltaTime);
 
         // 5. CEK JARAK (Kalau udah deket, ganti waypoint)

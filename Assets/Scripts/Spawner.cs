@@ -1,40 +1,49 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    // [PENTING]: Ini kabel yang dicari UIController lu!
     public static Action<int, int> OnWaveChanged;
-    [SerializeField] private ObjectPooler biasaPool, lincahPool, rajaPool;
+
+    [SerializeField] private ObjectPooler biasaPool;
+    [SerializeField] private ObjectPooler lincahPool;
+    [SerializeField] private ObjectPooler rajaPool;
 
     private Dictionary<EnemyType, ObjectPooler> _pools;
-    public int _currentWaveIndex = 0; // Biar bisa dibaca script lain
 
-    void Awake() {
-        _pools = new Dictionary<EnemyType, ObjectPooler> {
-            { EnemyType.TikusBiasa, biasaPool },
+    void Awake()
+    {
+        _pools = new Dictionary<EnemyType, ObjectPooler>
+        {
+            { EnemyType.TikusBiasa,  biasaPool  },
             { EnemyType.TikusLincah, lincahPool },
-            { EnemyType.RajaTikus, rajaPool }
+            { EnemyType.RajaTikus,   rajaPool   }
         };
     }
 
     public void ActivateFromPool(EnemyType type, int waveIndex)
     {
-        // Pas ganti wave, teriak ke UI!
-        if (_pools.TryGetValue(type, out var pool)) {
-            GameObject obj = pool.GetPooledObject();
-            if (obj != null) {
-                Debug.Log($"<color=green>BERHASIL SPAWN: {type}</color>"); // <--- TAMBAHIN INI RIZ!
-                obj.transform.position = transform.position;
-                Enemy e = obj.GetComponent<Enemy>();
-                if (e != null) e.SetDifficultyScale(waveIndex);
-                obj.SetActive(true);
-            }
-            else {
-            Debug.LogError($"<color=yellow>POOL KOSONG BUAT: {type}!</color>");
+        if (!_pools.TryGetValue(type, out var pool)) return;
+
+        GameObject obj = pool.GetPooledObject();
+        if (obj == null)
+        {
+            Debug.LogError($"Pool kosong buat: {type}!");
+            return;
         }
+
+        obj.transform.position = transform.position;
+
+        // [FIX MJ UTAMA]: SetDifficultyScale DULU sebelum SetActive
+        // SetActive → OnEnable → EnemyMovement mulai gerak pakai MoveSpeed
+        // Kalau SetDifficultyScale belum dipanggil, MoveSpeed masih 0 dari Die()
+        // Enemy ga gerak tapi facing-nya update → keliatan MJ
+        Enemy e = obj.GetComponent<Enemy>();
+        if (e != null) e.SetDifficultyScale(waveIndex);
+
+        obj.SetActive(true);
+
+        Debug.Log($"<color=green>SPAWN: {type} | Wave {waveIndex + 1}</color>");
     }
-  }
 }
