@@ -1415,3 +1415,8 @@ Start importing Assets/ScriptableObject/Wave/Wave 6.asset using Guid(37136dbe696
  -> (artifact id: '6e4c871c1abdf1bfd6add97e78a72cc0') in 0.001278 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 1
+Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
+TcpMessagingSession - receive error: operation aborted. errorcode: 995, details: The I/O operation has been aborted because of either a thread exit or an application request.
+AssetImportWorker is now disconnected from the server
+Process exiting
+Exiting without the bug reporter. Application will terminate with return code 0

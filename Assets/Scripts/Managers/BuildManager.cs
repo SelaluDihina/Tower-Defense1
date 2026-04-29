@@ -36,7 +36,25 @@ public class BuildManager : MonoBehaviour
 
     private SpriteRenderer ghostRenderer;
     private Transform      rangeIndicator;
+    
+    // fitur max towr berapa
+    [Header("Tower Limits")]
+    [SerializeField] private int maxTowers = 5; // Lu mau batesin berapa?
+    private int _currentTowerCount = 0;
+    
+    public void BuildTower(GameObject towerPrefab, Vector3 position)
+{
+    // [LOGIKA HARD MODE]: Cek apa towernya udah kebanyakan
+    if (_currentTowerCount >= maxTowers)
+    {
+        Debug.Log("Woy! Tower udah maksimal, kaga bisa bangun lagi!");
+        return; 
+    }
 
+    // Kalau masih aman, baru bangun
+    Instantiate(towerPrefab, position, Quaternion.identity);
+    _currentTowerCount++;
+}
     // =========================================================
     // UNITY CALLBACKS
     // =========================================================
