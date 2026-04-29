@@ -1,8 +1,6 @@
 using UnityEngine;
 
 // [PENTING]: Ini daftar ID musuh lu
-public enum EnemyType { TikusBiasa, TikusLincah, RajaTikus }
-
 [System.Serializable]
 public struct EnemyGroup 
 {

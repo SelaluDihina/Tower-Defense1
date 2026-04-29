@@ -12,46 +12,46 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject losePanel;
 
     [Header("Audio (Win/Lose)")]
-    // AudioSource itu speaker-nya, AudioClip itu kaset/file suaranya
     [SerializeField] private AudioSource sfxSource; 
     [SerializeField] private AudioClip winSound;
     [SerializeField] private AudioClip loseSound;
 
     private bool _allWavesSpawned = false;
 
-    // --- GRUP WA: Daftarin GameManager biar dapet notif dari script lain ---
     private void OnEnable()
     {
+        // [LOGIKA]: Dengerin pengumuman dari script Enemy
         Enemy.OnEnemyReachedEnd += HandleEnemyReachedEnd;
-        Enemy.OnEnemyDestroyed += CheckWinCondition;
+        Enemy.OnEnemyDestroyed += HandleEnemyDestroyed; // Kita pisah fungsinya biar rapi
     }   
     
     private void OnDisable()
     {
         Enemy.OnEnemyReachedEnd -= HandleEnemyReachedEnd;
-        Enemy.OnEnemyDestroyed -= CheckWinCondition;
+        Enemy.OnEnemyDestroyed -= HandleEnemyDestroyed;
     }
 
     private void Start()
     {
         GameIsOver = false;
-        Time.timeScale = 1f; // Biar waktu jalan normal lagi pas restart
+        Time.timeScale = 1f; 
 
-        // Sembunyiin UI menang/kalah pas baru mulai
         if (winPanel != null) winPanel.SetActive(false);
         if (losePanel != null) losePanel.SetActive(false);
 
-        // Kasih tau UI lives buat nampilin angka darah awal
         OnLivesChanged?.Invoke(PlayerStats.Lives);
     }
 
-    // --- KALO TIKUS TEMBUS: Darah lu dikurangin di sini ---
-    private void HandleEnemyReachedEnd(EnemyData data)
+    // --- [FIX]: Sekarang nerima data (Enemy enemy) bukan cuma data mentah ---
+    private void HandleEnemyReachedEnd(Enemy enemy)
     {
         if (GameIsOver) return;
 
-        // Kurangi nyawa player sesuai damage si tikus
-        PlayerStats.Lives = Mathf.Max(0, PlayerStats.Lives - data.damage);
+        // Ambil damage dari komponen Enemy-nya
+        // Pastiin di script Enemy lu ada variabel buat nyimpen damage (biasanya di data)
+        int damage = 1; // Default 1 kalo lu belum set di EnemyData
+        
+        PlayerStats.Lives = Mathf.Max(0, PlayerStats.Lives - damage);
         OnLivesChanged?.Invoke(PlayerStats.Lives);
 
         if (PlayerStats.Lives <= 0)
@@ -60,23 +60,34 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // --- CEK MENANG: Tiap ada musuh mati, script ini muter-muter map buat ngitung ---
-    private void CheckWinCondition(Enemy enemy)
+    // --- [FIX]: Fungsi baru buat ngurusin duit + cek menang ---
+    private void HandleEnemyDestroyed(Enemy enemy)
+    {
+        if (GameIsOver) return;
+
+        // 1. TAMBAH DUIT: Biar lu kaga miskin pas mau bangun tower
+        // Asumsi: Tiap tikus mati dapet 10 gold. Nanti lu bisa bikin variasi di EnemyData.
+        PlayerStats.Money += 10; 
+        
+        // 2. CEK KONDISI MENANG
+        CheckWinCondition();
+    }
+
+    private void CheckWinCondition()
     {
         if (GameIsOver || !_allWavesSpawned) return;
 
-        // Cari semua musuh yang lagi nempel di game
+        // [LOGIKA]: Cari semua musuh yang aktif di Hierarchy
         Enemy[] remainingEnemies = FindObjectsOfType<Enemy>();
         
         int activeCount = 0;
         foreach (Enemy e in remainingEnemies)
         {
-            // Cek beneran aktif/masih idup gak?
-            if (e.gameObject.activeSelf) activeCount++;
+            if (e.gameObject.activeInHierarchy) activeCount++;
         }
 
-        // Kalau sisa 1 (si pelapor) atau 0, berarti BERSIH!
-        if (activeCount <= 1)
+        // Kalau kaga ada musuh tersisa, berarti lu MENANG!
+        if (activeCount <= 0)
         {
             WinGame();
         }
@@ -87,10 +98,7 @@ public class GameManager : MonoBehaviour
         if (GameIsOver) return;
         GameIsOver = true;
         
-        Debug.Log("GG!");
         if (winPanel != null) winPanel.SetActive(true);
-
-        // Putar suara menang sekali (PlayOneShot)
         if (sfxSource != null && winSound != null) sfxSource.PlayOneShot(winSound);
     }
 
@@ -99,18 +107,16 @@ public class GameManager : MonoBehaviour
         if (GameIsOver) return;
         GameIsOver = true;
         
-        Debug.Log("KALAH!");
         if (losePanel != null) losePanel.SetActive(true);
-        Time.timeScale = 0f; // Freeze game biar dramatis
+        Time.timeScale = 0f; 
 
-        // Putar suara kalah
         if (sfxSource != null && loseSound != null) sfxSource.PlayOneShot(loseSound);
     }
 
     public void SetAllWavesSpawned()
     {
         _allWavesSpawned = true;
-        CheckWinCondition(null);
+        CheckWinCondition();
     }
 
     public void RestartGame()

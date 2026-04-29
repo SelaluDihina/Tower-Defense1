@@ -13,10 +13,15 @@ MonoBehaviour:
   m_Name: TowerLem
   m_EditorClassIdentifier: 
   range: 3
-  shootInterval: 1
+  shootInterval: 0.5
   projectileSpeed: 15
   projectileDuration: 2
   damage: 5
   cost: 50
   slowMultiplier: 0.5
   slowDuration: 2
+  isAOE: 1
+  splashRadius: 3
+  isArtillery: 1
+  arcHeight: 5
+  travelTime: 1.5

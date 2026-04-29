@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 285d68b1a4f2fed4a893ea393d70ffe6, type: 3}
   m_Name: Enemy_TikusLincah
   m_EditorClassIdentifier: 
-  enemyType: 0
+  enemyType: 2
   lives: 60
   damage: 1
-  speed: 4.5
+  speed: 3
   goldReward: 25

@@ -1286,3 +1286,365 @@ Start importing Assets/ScriptableObject/Wave/WaveManagers.cs using Guid(9fc8fadc
  -> (artifact id: '499e677ed8dafffa1dee42a7e91dc7a8') in 0.002314 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 1159.286674 seconds.
+  path: Assets/ScriptableObject/Wave/WaveManagers.cs
+  artifactKey: Guid(9fc8fadcc7b6e0c4bb12601f65e5c863) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ScriptableObject/Wave/WaveManagers.cs using Guid(9fc8fadcc7b6e0c4bb12601f65e5c863) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+ -> (artifact id: '989292c98c24c6cc3128e090d5d9769f') in 0.001931 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 6432.503538 seconds.
+  path: Assets/ScriptableObject/Wave/Wave1.asset
+  artifactKey: Guid(b43b2cd1d5d2b944f8a651b4d716fd2b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ScriptableObject/Wave/Wave1.asset using Guid(b43b2cd1d5d2b944f8a651b4d716fd2b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+ -> (artifact id: 'd3de19da825c0792369f781d8e072529') in 0.254318 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Prepare
+Caller must complete domain reload
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  2.611 seconds
+Native extension for WindowsStandalone target not found
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  8.450 seconds
+Domain Reload Profiling: 11059ms
+	BeginReloadAssembly (426ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (40ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (154ms)
+	RebuildCommonClasses (40ms)
+	RebuildNativeTypeToScriptingClass (29ms)
+	initialDomainReloadingComplete (60ms)
+	LoadAllAssembliesAndSetupDomain (2054ms)
+		LoadAssemblies (2021ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (207ms)
+			TypeCache.Refresh (31ms)
+				TypeCache.ScanAssembly (1ms)
+			ScanForSourceGeneratedMonoScriptInfo (157ms)
+			ResolveRequiredComponents (18ms)
+	FinalizeReload (8450ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (875ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (15ms)
+			SetLoadedEditorAssemblies (6ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (127ms)
+			ProcessInitializeOnLoadAttributes (551ms)
+			ProcessInitializeOnLoadMethodAttributes (163ms)
+			AfterProcessingInitializeOnLoad (11ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (34ms)
+Refreshing native plugins compatible for Editor in 12.82 ms, found 5 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 5893 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 23 unused Assets / (318.1 KB). Loaded Objects now: 6839.
+Memory consumption went from 203.6 MB to 203.3 MB.
+Total: 8.533200 ms (FindLiveObjects: 0.679300 ms CreateObjectMapping: 0.376100 ms MarkObjects: 7.322100 ms  DeleteObjects: 0.153500 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:scripting/monoscript/fileName/WaveData.cs: 88bd94cd5ffdc01da4b4227d0d730cac -> c106844113dc867a1e299b5f770c0765
+  custom:CustomObjectIndexerAttribute: 72b91833f83ae208fae7752999fa3104 -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:scripting/monoscript/fileName/WaveManagers.cs: f2d4c179f17297a9a2a9b2458d4f3b0b -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/precompiled-assembly-types:Assembly-CSharp: 519eabeae6a33a8c40c6eace13d0fdc0 -> b9e1067fdb02d5ce4b43342a1255ad98
+========================================================================
+Received Import Request.
+  Time since last request: 942.568366 seconds.
+  path: Assets/ScriptableObject/Wave/Wave1.asset
+  artifactKey: Guid(b43b2cd1d5d2b944f8a651b4d716fd2b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ScriptableObject/Wave/Wave1.asset using Guid(b43b2cd1d5d2b944f8a651b4d716fd2b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+ -> (artifact id: '5c81eaa7d9bd9c8cd0e0db4ef7a48047') in 0.034514 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.412148 seconds.
+  path: Assets/ScriptableObject/Wave/Wave3 2.asset
+  artifactKey: Guid(1a15bce4220e111438e45e0aee33b688) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ScriptableObject/Wave/Wave3 2.asset using Guid(1a15bce4220e111438e45e0aee33b688) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+ -> (artifact id: '5d32c0ae8370a9a348ae00524a75c8f4') in 0.001154 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.435000 seconds.
+  path: Assets/ScriptableObject/Wave/Wave3 3.asset
+  artifactKey: Guid(ab27db1e89164ad4e8c6c0766cc785f0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ScriptableObject/Wave/Wave3 3.asset using Guid(ab27db1e89164ad4e8c6c0766cc785f0) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+ -> (artifact id: '97eaae85a767f3e5008cfdb0cc8a017e') in 0.002086 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 11.682279 seconds.
+  path: Assets/ScriptableObject/Wave/Wave1.asset
+  artifactKey: Guid(b43b2cd1d5d2b944f8a651b4d716fd2b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ScriptableObject/Wave/Wave1.asset using Guid(b43b2cd1d5d2b944f8a651b4d716fd2b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+ -> (artifact id: 'ca730c40d7b616bcdca75e16c64e0f6e') in 0.001919 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 6.025908 seconds.
+  path: Assets/ScriptableObject/Wave/Wave3 1.asset
+  artifactKey: Guid(90d1a6fb3016d2e418530e88d188d0b5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ScriptableObject/Wave/Wave3 1.asset using Guid(90d1a6fb3016d2e418530e88d188d0b5) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+ -> (artifact id: '30db5b6997cb4761072859201a61f1f5') in 0.003153 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 11.284136 seconds.
+  path: Assets/ScriptableObject/Wave/Wave1 1.asset
+  artifactKey: Guid(c946950e861a26f40a002a1431c1a42e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ScriptableObject/Wave/Wave1 1.asset using Guid(c946950e861a26f40a002a1431c1a42e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+ -> (artifact id: '02690efd7af7fe8116bda49173fcebaf') in 0.001329 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.769307 seconds.
+  path: Assets/ScriptableObject/Wave/Wave1 2.asset
+  artifactKey: Guid(e63f3722f6a13554b9ea8f6290f23d53) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ScriptableObject/Wave/Wave1 2.asset using Guid(e63f3722f6a13554b9ea8f6290f23d53) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+ -> (artifact id: 'b22c61fda65839d566d565882ae16ba1') in 0.001539 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.324433 seconds.
+  path: Assets/ScriptableObject/Wave/Wave1 3.asset
+  artifactKey: Guid(537a5647c90979047b2cddb2b89f20bb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ScriptableObject/Wave/Wave1 3.asset using Guid(537a5647c90979047b2cddb2b89f20bb) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+ -> (artifact id: '4a696d688cb6e2d56f5ad97ebda856bb') in 0.001561 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.160589 seconds.
+  path: Assets/ScriptableObject/Wave/Wave1 4.asset
+  artifactKey: Guid(bf001a5bc8fd166498cbf03d0403f96e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ScriptableObject/Wave/Wave1 4.asset using Guid(bf001a5bc8fd166498cbf03d0403f96e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+ -> (artifact id: '787a890d13fa42cc1d6647aed660e87c') in 0.001808 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.193203 seconds.
+  path: Assets/ScriptableObject/Wave/Wave1 5.asset
+  artifactKey: Guid(0012e59e8bcf19049b475a658f37a84d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ScriptableObject/Wave/Wave1 5.asset using Guid(0012e59e8bcf19049b475a658f37a84d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+ -> (artifact id: '95212002688037b4f18ae0db76342394') in 0.001944 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.142788 seconds.
+  path: Assets/ScriptableObject/Wave/Wave1 6.asset
+  artifactKey: Guid(dcf8d6424b1f1a8409cee35d27076cee) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ScriptableObject/Wave/Wave1 6.asset using Guid(dcf8d6424b1f1a8409cee35d27076cee) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+ -> (artifact id: 'd8174bdd19963862602dcbfb80bfb8d6') in 0.002167 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.153060 seconds.
+  path: Assets/ScriptableObject/Wave/Wave1 7.asset
+  artifactKey: Guid(67c292be993e16f4ba05fadd24e6c66f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ScriptableObject/Wave/Wave1 7.asset using Guid(67c292be993e16f4ba05fadd24e6c66f) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+ -> (artifact id: '5f00d719d5b8157b5ca4289bd2923bc6') in 0.001813 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.172056 seconds.
+  path: Assets/ScriptableObject/Wave/Wave1 8.asset
+  artifactKey: Guid(3210dfbfc526e7d4e8fde1c0d0415242) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ScriptableObject/Wave/Wave1 8.asset using Guid(3210dfbfc526e7d4e8fde1c0d0415242) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+ -> (artifact id: '69c15932c14518aa3cc6cc601038def1') in 0.002586 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.170671 seconds.
+  path: Assets/ScriptableObject/Wave/Wave1 9.asset
+  artifactKey: Guid(1b031a310a799c240a75fcf0cc5033ef) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ScriptableObject/Wave/Wave1 9.asset using Guid(1b031a310a799c240a75fcf0cc5033ef) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+ -> (artifact id: 'c204d74564eb4ea652187e93e22e8d32') in 0.001218 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.236182 seconds.
+  path: Assets/ScriptableObject/Wave/Wave1 10.asset
+  artifactKey: Guid(e6f53c996df14a743b6120cc95ccebf6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ScriptableObject/Wave/Wave1 10.asset using Guid(e6f53c996df14a743b6120cc95ccebf6) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+ -> (artifact id: '151c044677c7c281961b1795a7df9e6b') in 0.001792 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 21.666322 seconds.
+  path: Assets/ScriptableObject/Wave/Wave.asset
+  artifactKey: Guid(b43b2cd1d5d2b944f8a651b4d716fd2b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ScriptableObject/Wave/Wave.asset using Guid(b43b2cd1d5d2b944f8a651b4d716fd2b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+ -> (artifact id: 'dc8ea74db2da914c1458e2c0d466b374') in 0.002297 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 1.579501 seconds.
+  path: Assets/ScriptableObject/Wave/Wave 1.asset
+  artifactKey: Guid(0f81e86ca5c2c8d4098cab5d35cebe61) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ScriptableObject/Wave/Wave 1.asset using Guid(0f81e86ca5c2c8d4098cab5d35cebe61) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+ -> (artifact id: 'fd4748e9cbe825cc5420ff351df10912') in 0.001442 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.338258 seconds.
+  path: Assets/ScriptableObject/Wave/Wave 2.asset
+  artifactKey: Guid(0b8399ef5a3528d419041b88fd8684dd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ScriptableObject/Wave/Wave 2.asset using Guid(0b8399ef5a3528d419041b88fd8684dd) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+ -> (artifact id: '2610de1e01c9c983e4a05e096d5cfa87') in 0.001319 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.440320 seconds.
+  path: Assets/ScriptableObject/Wave/Wave 3.asset
+  artifactKey: Guid(773c2a3c8a96c9a4dab64f5c3f8e1826) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ScriptableObject/Wave/Wave 3.asset using Guid(773c2a3c8a96c9a4dab64f5c3f8e1826) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+ -> (artifact id: 'fcf71f711ad7723b4dd374b5cd53a1d3') in 0.002023 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.243691 seconds.
+  path: Assets/ScriptableObject/Wave/Wave 4.asset
+  artifactKey: Guid(228d7994126cf3146a5bfd2286e2dc85) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ScriptableObject/Wave/Wave 4.asset using Guid(228d7994126cf3146a5bfd2286e2dc85) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+ -> (artifact id: '04df6385f1179ac1b7ec0ed6f13181e6') in 0.001558 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.274377 seconds.
+  path: Assets/ScriptableObject/Wave/Wave 5.asset
+  artifactKey: Guid(b6f73f5af74e8dc49acf92e8f784161c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ScriptableObject/Wave/Wave 5.asset using Guid(b6f73f5af74e8dc49acf92e8f784161c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+ -> (artifact id: 'a74644f09c4ea7c3710fd307243c0be1') in 0.001424 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.247534 seconds.
+  path: Assets/ScriptableObject/Wave/Wave 6.asset
+  artifactKey: Guid(37136dbe69697aa4db8497ceea156634) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ScriptableObject/Wave/Wave 6.asset using Guid(37136dbe69697aa4db8497ceea156634) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+ -> (artifact id: '04bfdbeb8d493de57c69080a917df47c') in 0.001272 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.216560 seconds.
+  path: Assets/ScriptableObject/Wave/Wave 7.asset
+  artifactKey: Guid(8ad877afa7953634381f0d1eb82ea392) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ScriptableObject/Wave/Wave 7.asset using Guid(8ad877afa7953634381f0d1eb82ea392) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+ -> (artifact id: 'beb817031235934a15067cf02e001385') in 0.002301 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.310358 seconds.
+  path: Assets/ScriptableObject/Wave/Wave 8.asset
+  artifactKey: Guid(6e0a056f7f6a5324e99215e85af56210) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ScriptableObject/Wave/Wave 8.asset using Guid(6e0a056f7f6a5324e99215e85af56210) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+ -> (artifact id: '72b400f8b8b0fe03134e799d83a369d4') in 0.000916 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.314973 seconds.
+  path: Assets/ScriptableObject/Wave/Wave 9.asset
+  artifactKey: Guid(443e30b16e659ef47be101694a922e6e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ScriptableObject/Wave/Wave 9.asset using Guid(443e30b16e659ef47be101694a922e6e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+ -> (artifact id: '4a1bf794e434787d570cbc7faa1380dc') in 0.001452 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.351300 seconds.
+  path: Assets/ScriptableObject/Wave/Wave 10.asset
+  artifactKey: Guid(89a998f0f4e36c94d8fd074c34c78595) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ScriptableObject/Wave/Wave 10.asset using Guid(89a998f0f4e36c94d8fd074c34c78595) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+ -> (artifact id: 'ff5846d4919a0bccc7c014137b229301') in 0.001427 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.331150 seconds.
+  path: Assets/ScriptableObject/Wave/Wave 11.asset
+  artifactKey: Guid(fdcdb3b28a6946d45a55504c8ca412bc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ScriptableObject/Wave/Wave 11.asset using Guid(fdcdb3b28a6946d45a55504c8ca412bc) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+ -> (artifact id: 'd3635e35b93feada846f4f9e9b54669b') in 0.002232 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.293207 seconds.
+  path: Assets/ScriptableObject/Wave/Wave 12.asset
+  artifactKey: Guid(0c545a22bab20e1498b47359cd61c055) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ScriptableObject/Wave/Wave 12.asset using Guid(0c545a22bab20e1498b47359cd61c055) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+ -> (artifact id: '869e6adcba3a693ea737bac8ad3c831a') in 0.002245 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.258950 seconds.
+  path: Assets/ScriptableObject/Wave/Wave 13.asset
+  artifactKey: Guid(b3db3cb8383845e4f925ce5afd5c7c9c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ScriptableObject/Wave/Wave 13.asset using Guid(b3db3cb8383845e4f925ce5afd5c7c9c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+ -> (artifact id: '451291d5cdd9c11b90bdc2e45d7eda7c') in 0.001500 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.217416 seconds.
+  path: Assets/ScriptableObject/Wave/Wave 14.asset
+  artifactKey: Guid(8190f8d83ded9c1418899c003e96b48a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ScriptableObject/Wave/Wave 14.asset using Guid(8190f8d83ded9c1418899c003e96b48a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+ -> (artifact id: 'f26d35a27d5ca9bc4a55deeef95abfe6') in 0.001435 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.429970 seconds.
+  path: Assets/ScriptableObject/Wave/Wave 15.asset
+  artifactKey: Guid(e88de28ae3067d34c951f5434099fade) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ScriptableObject/Wave/Wave 15.asset using Guid(e88de28ae3067d34c951f5434099fade) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+ -> (artifact id: 'e6012e08750244a5805fe834c21139bc') in 0.001650 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
