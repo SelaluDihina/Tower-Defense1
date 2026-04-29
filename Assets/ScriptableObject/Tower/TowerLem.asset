@@ -17,7 +17,7 @@ MonoBehaviour:
   projectileSpeed: 15
   projectileDuration: 2
   damage: 5
-  cost: 50
+  cost: 125
   slowMultiplier: 0.5
   slowDuration: 2
   isAOE: 1
