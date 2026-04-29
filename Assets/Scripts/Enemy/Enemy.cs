@@ -13,6 +13,8 @@ public class Enemy : MonoBehaviour
 
     private float _currentHealth;
     private float _moveSpeed;
+    // Tambahin ini biar script movement bisa baca kecepatannya
+    public float MoveSpeed => _moveSpeed;
 
     public void SetDifficultyScale(int waveIndex)
     {

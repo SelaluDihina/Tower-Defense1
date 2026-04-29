@@ -38,31 +38,30 @@ public class WaveManagers : MonoBehaviour
         _countdown -= Time.deltaTime;
     }
 
-    IEnumerator SpawnWave()
+     IEnumerator SpawnWave()
+{
+    _isSpawning = true;
+    WaveData currentWave = waves[_currentWaveIndex];
+
+    // [PENTING]: Lapor ke UI lewat Action yang ada di Spawner
+    // Kita ambil data 'waves.Length' dari sini karena di sini tempatnya!
+    Spawner.OnWaveChanged?.Invoke(_currentWaveIndex + 1, waves.Length); 
+
+    Debug.Log($"<color=red>WAVE {_currentWaveIndex + 1} DIMULAI!</color>");
+
+    foreach (var group in currentWave.enemyGroups)
     {
-        _isSpawning = true;
-        WaveData currentWave = waves[_currentWaveIndex];
-
-        // Lapor ke UI
-        Spawner.OnWaveChanged?.Invoke(_currentWaveIndex + 1, waves.Length);
-        Debug.Log($"<color=red>WAVE {_currentWaveIndex + 1} DIMULAI!</color>");
-
-        foreach (var group in currentWave.enemyGroups)
+        for (int i = 0; i < group.count; i++)
         {
-            for (int i = 0; i < group.count; i++)
-            {
-                if (_spawner != null) _spawner.ActivateFromPool(group.enemyType);
-                yield return new WaitForSeconds(group.spawnInterval);
-            }
-            yield return new WaitForSeconds(1f); // Jeda antar grup musuh
+            // Kirim 'type' ama 'index' biar difficulty-nya pas
+            if (_spawner != null) _spawner.ActivateFromPool(group.enemyType, _currentWaveIndex);
+            yield return new WaitForSeconds(group.spawnInterval);
         }
-
-        _isSpawning = false;
-        _currentWaveIndex++;
-
-        if (_currentWaveIndex >= waves.Length)
-        {
-            if(_gameManager != null) _gameManager.SetAllWavesSpawned();
-        }
+        yield return new WaitForSeconds(1f); 
     }
+
+    _isSpawning = false;
+    _currentWaveIndex++;
 }
+    }
+

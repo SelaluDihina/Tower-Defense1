@@ -22,6 +22,6 @@ MonoBehaviour:
   slowDuration: 2
   isAOE: 0
   splashRadius: 2
-  isArtillery: 1
+  isArtillery: 0
   arcHeight: 5
   travelTime: 1.5

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Enemy_TikusBiasa
   m_EditorClassIdentifier: 
   enemyType: 1
-  lives: 100
+  lives: 60
   damage: 1
   speed: 2
   goldReward: 15

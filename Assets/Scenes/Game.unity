@@ -5108,6 +5108,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 854968814}
+  - component: {fileID: 854968815}
   - component: {fileID: 854968813}
   m_Layer: 0
   m_Name: Spawner
@@ -5166,6 +5167,35 @@ Transform:
   - {fileID: 1473608582}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &854968815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 854968812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fc8fadcc7b6e0c4bb12601f65e5c863, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waves:
+  - {fileID: 11400000, guid: 0f81e86ca5c2c8d4098cab5d35cebe61, type: 2}
+  - {fileID: 11400000, guid: 0b8399ef5a3528d419041b88fd8684dd, type: 2}
+  - {fileID: 11400000, guid: 773c2a3c8a96c9a4dab64f5c3f8e1826, type: 2}
+  - {fileID: 11400000, guid: 228d7994126cf3146a5bfd2286e2dc85, type: 2}
+  - {fileID: 11400000, guid: b6f73f5af74e8dc49acf92e8f784161c, type: 2}
+  - {fileID: 11400000, guid: 37136dbe69697aa4db8497ceea156634, type: 2}
+  - {fileID: 11400000, guid: 8ad877afa7953634381f0d1eb82ea392, type: 2}
+  - {fileID: 11400000, guid: 6e0a056f7f6a5324e99215e85af56210, type: 2}
+  - {fileID: 11400000, guid: 443e30b16e659ef47be101694a922e6e, type: 2}
+  - {fileID: 11400000, guid: 89a998f0f4e36c94d8fd074c34c78595, type: 2}
+  - {fileID: 11400000, guid: fdcdb3b28a6946d45a55504c8ca412bc, type: 2}
+  - {fileID: 11400000, guid: 0c545a22bab20e1498b47359cd61c055, type: 2}
+  - {fileID: 11400000, guid: b3db3cb8383845e4f925ce5afd5c7c9c, type: 2}
+  - {fileID: 11400000, guid: 8190f8d83ded9c1418899c003e96b48a, type: 2}
+  - {fileID: 11400000, guid: e88de28ae3067d34c951f5434099fade, type: 2}
+  timeBetweenWaves: 5
 --- !u!1 &939426565
 GameObject:
   m_ObjectHideFlags: 0
