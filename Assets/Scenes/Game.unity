@@ -6757,11 +6757,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6e0a056f7f6a5324e99215e85af56210, type: 2}
   - {fileID: 11400000, guid: 443e30b16e659ef47be101694a922e6e, type: 2}
   - {fileID: 11400000, guid: 89a998f0f4e36c94d8fd074c34c78595, type: 2}
-  - {fileID: 11400000, guid: fdcdb3b28a6946d45a55504c8ca412bc, type: 2}
-  - {fileID: 11400000, guid: 0c545a22bab20e1498b47359cd61c055, type: 2}
-  - {fileID: 11400000, guid: b3db3cb8383845e4f925ce5afd5c7c9c, type: 2}
-  - {fileID: 11400000, guid: 8190f8d83ded9c1418899c003e96b48a, type: 2}
-  - {fileID: 11400000, guid: e88de28ae3067d34c951f5434099fade, type: 2}
   timeBetweenWaves: 5
 --- !u!1 &887881926
 GameObject:
@@ -15042,7 +15037,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '1/15
+  m_text: '1/10
 
 '
   m_isRightToLeft: 0

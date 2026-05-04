@@ -16,13 +16,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AudioClip winSound;
     [SerializeField] private AudioClip loseSound;
 
-    private bool _allWavesSpawned = false;
+    private bool _allWavesSpawned = false; 
 
     private void OnEnable()
     {
-        // [LOGIKA]: Dengerin pengumuman dari script Enemy
         Enemy.OnEnemyReachedEnd += HandleEnemyReachedEnd;
-        Enemy.OnEnemyDestroyed += HandleEnemyDestroyed; // Kita pisah fungsinya biar rapi
+        Enemy.OnEnemyDestroyed += HandleEnemyDestroyed; 
     }   
     
     private void OnDisable()
@@ -42,15 +41,11 @@ public class GameManager : MonoBehaviour
         OnLivesChanged?.Invoke(PlayerStats.Lives);
     }
 
-    // --- [FIX]: Sekarang nerima data (Enemy enemy) bukan cuma data mentah ---
     private void HandleEnemyReachedEnd(Enemy enemy)
     {
         if (GameIsOver) return;
 
-        // Ambil damage dari komponen Enemy-nya
-        // Pastiin di script Enemy lu ada variabel buat nyimpen damage (biasanya di data)
-        int damage = 1; // Default 1 kalo lu belum set di EnemyData
-        
+        int damage = 1; 
         PlayerStats.Lives = Mathf.Max(0, PlayerStats.Lives - damage);
         OnLivesChanged?.Invoke(PlayerStats.Lives);
 
@@ -58,18 +53,19 @@ public class GameManager : MonoBehaviour
         {
             LoseGame();
         }
+        else 
+        {
+            // [FIX]: Kalau musuh lolos tapi lu masih hidup, tetep cek menang!
+            // Takutnya ini musuh terakhir yang lewat.
+            CheckWinCondition();
+        }
     }
 
-    // --- [FIX]: Fungsi baru buat ngurusin duit + cek menang ---
     private void HandleEnemyDestroyed(Enemy enemy)
     {
         if (GameIsOver) return;
 
-        // 1. TAMBAH DUIT: Biar lu kaga miskin pas mau bangun tower
-        // Asumsi: Tiap tikus mati dapet 10 gold. Nanti lu bisa bikin variasi di EnemyData.
         PlayerStats.Money += 10; 
-        
-        // 2. CEK KONDISI MENANG
         CheckWinCondition();
     }
 
@@ -77,7 +73,6 @@ public class GameManager : MonoBehaviour
     {
         if (GameIsOver || !_allWavesSpawned) return;
 
-        // [LOGIKA]: Cari semua musuh yang aktif di Hierarchy
         Enemy[] remainingEnemies = FindObjectsOfType<Enemy>();
         
         int activeCount = 0;
@@ -86,7 +81,6 @@ public class GameManager : MonoBehaviour
             if (e.gameObject.activeInHierarchy) activeCount++;
         }
 
-        // Kalau kaga ada musuh tersisa, berarti lu MENANG!
         if (activeCount <= 0)
         {
             WinGame();
@@ -98,8 +92,13 @@ public class GameManager : MonoBehaviour
         if (GameIsOver) return;
         GameIsOver = true;
         
-        if (winPanel != null) winPanel.SetActive(true);
-        if (sfxSource != null && winSound != null) sfxSource.PlayOneShot(winSound);
+        if (winPanel != null) winPanel.SetActive(true); 
+        Time.timeScale = 0f; // [FIX]: Biar game beneran berhenti pas menang
+
+        if (sfxSource != null && winSound != null) 
+            sfxSource.PlayOneShot(winSound);
+
+        Debug.Log("<color=green>[SYSTEM] SADIS RIZ! LU MENANG!</color>");
     }
 
     public void LoseGame()
@@ -110,13 +109,15 @@ public class GameManager : MonoBehaviour
         if (losePanel != null) losePanel.SetActive(true);
         Time.timeScale = 0f; 
 
-        if (sfxSource != null && loseSound != null) sfxSource.PlayOneShot(loseSound);
+        if (sfxSource != null && loseSound != null) 
+            sfxSource.PlayOneShot(loseSound);
     }
 
     public void SetAllWavesSpawned()
     {
         _allWavesSpawned = true;
-        CheckWinCondition();
+        Debug.Log("<color=orange>[SYSTEM] Wave terakhir sudah keluar semua!</color>");
+        CheckWinCondition(); 
     }
 
     public void RestartGame()

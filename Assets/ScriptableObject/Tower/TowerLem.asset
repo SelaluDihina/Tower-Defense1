@@ -16,7 +16,7 @@ MonoBehaviour:
   shootInterval: 0.5
   projectileSpeed: 15
   projectileDuration: 2
-  damage: 5
+  damage: 15
   cost: 125
   slowMultiplier: 0.5
   slowDuration: 2

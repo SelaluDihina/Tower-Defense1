@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Enemy_TikusLincah
   m_EditorClassIdentifier: 
   enemyType: 2
-  lives: 40
+  lives: 50
   damage: 1
   speed: 3
   goldReward: 25
