@@ -20,24 +20,30 @@ public class GameManager : MonoBehaviour
 
     private void OnEnable()
     {
+        // Berlangganan event saat musuh lolos atau hancur
         Enemy.OnEnemyReachedEnd += HandleEnemyReachedEnd;
         Enemy.OnEnemyDestroyed += HandleEnemyDestroyed; 
     }   
     
     private void OnDisable()
     {
+        // Berhenti berlangganan agar tidak terjadi memory leak
         Enemy.OnEnemyReachedEnd -= HandleEnemyReachedEnd;
         Enemy.OnEnemyDestroyed -= HandleEnemyDestroyed;
     }
 
     private void Start()
     {
+        // Reset status game dan pastikan waktu berjalan normal (1f)
+        PlayerStats.Lives = 10;
         GameIsOver = false;
         Time.timeScale = 1f; 
 
+        // Sembunyikan semua panel endgame saat baru mulai
         if (winPanel != null) winPanel.SetActive(false);
         if (losePanel != null) losePanel.SetActive(false);
 
+        // Update UI nyawa di awal game
         OnLivesChanged?.Invoke(PlayerStats.Lives);
     }
 
@@ -45,6 +51,7 @@ public class GameManager : MonoBehaviour
     {
         if (GameIsOver) return;
 
+        // Kurangi nyawa player jika tikus masuk gudang
         int damage = 1; 
         PlayerStats.Lives = Mathf.Max(0, PlayerStats.Lives - damage);
         OnLivesChanged?.Invoke(PlayerStats.Lives);
@@ -55,8 +62,7 @@ public class GameManager : MonoBehaviour
         }
         else 
         {
-            // [FIX]: Kalau musuh lolos tapi lu masih hidup, tetep cek menang!
-            // Takutnya ini musuh terakhir yang lewat.
+            // Cek kemenangan jika musuh terakhir lewat tapi nyawa masih ada
             CheckWinCondition();
         }
     }
@@ -65,12 +71,14 @@ public class GameManager : MonoBehaviour
     {
         if (GameIsOver) return;
 
+        // Tambah uang dan cek apakah ini musuh terakhir untuk menang
         PlayerStats.Money += 10; 
         CheckWinCondition();
     }
 
     private void CheckWinCondition()
     {
+        // Syarat menang: Semua wave sudah spawn DAN tidak ada tikus tersisa di arena
         if (GameIsOver || !_allWavesSpawned) return;
 
         Enemy[] remainingEnemies = FindObjectsOfType<Enemy>();
@@ -81,10 +89,9 @@ public class GameManager : MonoBehaviour
             if (e.gameObject.activeInHierarchy) activeCount++;
         }
 
-        if (activeCount <= 0)
+        if (activeCount <= 1)
         {
-            WinGame();
-        }
+            Invoke(nameof(WinGame), 0.1f);        }
     }
 
     public void WinGame()
@@ -93,12 +100,12 @@ public class GameManager : MonoBehaviour
         GameIsOver = true;
         
         if (winPanel != null) winPanel.SetActive(true); 
-        Time.timeScale = 0f; // [FIX]: Biar game beneran berhenti pas menang
+        Time.timeScale = 0f; // Hentikan waktu agar tower/tikus tidak bergerak lagi
 
         if (sfxSource != null && winSound != null) 
             sfxSource.PlayOneShot(winSound);
 
-        Debug.Log("<color=green>[SYSTEM] SADIS RIZ! LU MENANG!</color>");
+        Debug.Log("<color=green>[SYSTEM] MENANG!</color>");
     }
 
     public void LoseGame()
@@ -106,8 +113,9 @@ public class GameManager : MonoBehaviour
         if (GameIsOver) return;
         GameIsOver = true;
         
+        // Aktifkan LosePanel sesuai desain di LoseFix.jpg
         if (losePanel != null) losePanel.SetActive(true);
-        Time.timeScale = 0f; 
+        Time.timeScale = 0f; // Freeze game agar player fokus ke panel Game Over
 
         if (sfxSource != null && loseSound != null) 
             sfxSource.PlayOneShot(loseSound);
@@ -120,8 +128,21 @@ public class GameManager : MonoBehaviour
         CheckWinCondition(); 
     }
 
+    // --- [LOGIKA TOMBOL PADA LOSE PANEL] ---
+
+    // Dipasang pada tombol "Coba Lagi" (LoseFix.jpg)
     public void RestartGame()
     {
+        // Reset Time.timeScale ke 1f WAJIB sebelum reload scene agar game tidak freeze di awal
+        Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    // Dipasang pada tombol "Kembali" (LoseFix.jpg)
+    public void ToMainMenu()
+    {
+        // Memuat scene menu utama (pastikan MainMenu ada di index 0 pada Build Settings)
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(0);
     }
 }

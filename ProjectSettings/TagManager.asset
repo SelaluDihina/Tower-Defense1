@@ -48,3 +48,6 @@ TagManager:
   - name: UI_AboveEnemy
     uniqueID: 3643243421
     locked: 0
+  - name: UI_Depan
+    uniqueID: 2184805769
+    locked: 0
