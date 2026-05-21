@@ -9,61 +9,83 @@ public class EnemyMovement : MonoBehaviour
     void Awake()
     {
         _enemy = GetComponent<Enemy>();
-        
-        // Cari folder Path1 di Hierarchy
-        GameObject pathObj = GameObject.Find("Path1");
-        if (pathObj != null)
+    }
+
+    // Fungsi cerdik buat ngecek ketersediaan jalur di setiap level
+    public void UpdateRuntimePath()
+    {
+        // 1. LOGIKA LEVEL 2: Kalau Enemy punya data jalur dinamis atas/bawah dari Spawner
+        if (_enemy != null && _enemy.Waypoints != null && _enemy.Waypoints.Length > 0)
         {
-            _waypoints = new Transform[pathObj.transform.childCount];
-            for (int i = 0; i < pathObj.transform.childCount; i++)
+            _waypoints = _enemy.Waypoints;
+            _waypointIndex = 0;
+
+            if (_waypoints[0] != null)
             {
-                _waypoints[i] = pathObj.transform.GetChild(i);
+                transform.position = _waypoints[0].position;
+            }
+        }
+        // 2. LOGIKA LEVEL 1 (SOLUSI TABRAKAN): Kalo data atas/bawah kosong, otomatis cari "Path1" tunggal!
+        else
+        {
+            GameObject pathObj = GameObject.Find("Path1");
+            if (pathObj != null)
+            {
+                _waypoints = new Transform[pathObj.transform.childCount];
+                for (int i = 0; i < pathObj.transform.childCount; i++)
+                {
+                    _waypoints[i] = pathObj.transform.GetChild(i);
+                }
+                
+                _waypointIndex = 0;
+                
+                if (_waypoints.Length > 0 && _waypoints[0] != null)
+                {
+                    transform.position = _waypoints[0].position;
+                }
             }
         }
     }
 
-    // Reset index tiap kali keluar dari pool
     void OnEnable()
     {
-        _waypointIndex = 0; // Reset target index
-
-        // [FIX SPAWN]: Paksa posisi tikus ke Waypoint(0) pas baru muncul
-        if (_waypoints != null && _waypoints.Length > 0)
-        {
-            transform.position = _waypoints[0].position;
-        }
+        _waypointIndex = 0; 
+        // Deteksi jalur langsung pas tikus keluar dari Object Pooler
+        UpdateRuntimePath();
     }
 
     void Update()
     {
-        // 1. Cek apa jalanannya ada
-        if (_waypoints == null || _waypointIndex >= _waypoints.Length) return;
+        // Pengaman darurat: kalo di frame awal datanya sempat miss, paksa cari lagi
+        if (_waypoints == null || _waypoints.Length == 0)
+        {
+            UpdateRuntimePath();
+            return;
+        }
 
-        // 2. Tentukan target posisi waypoint sekarang
+        if (_waypointIndex >= _waypoints.Length) return;
+        if (_waypoints[_waypointIndex] == null) return;
+
+        // Tentukan koordinat target
         Vector3 targetPos = _waypoints[_waypointIndex].position;
 
-        // --- 3. LOGIKA modular HADAP (TANPA MJ) ---
-        // Sesuai request lu, kita hapus logic flipping (hadap kiri/kanan).
-        // Kita cuma pake logika rotation dasar biar dia selalu nengok ke target.
-        // Asumsi: Sprite tikus lu aslinya hadap Kanan.
+        // --- LOGIKA ROTASI HADAP TIKUS (Pertahankan Kode Asli Lu) ---
         Vector3 direction = targetPos - transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        // ------------------------------------------
+        // -------------------------------------------------------------
 
-        // 4. GERAK LURUS MENUJU TARGET (Direct Move)
-        // Gerak pake MoveSpeed dari script Enemy yang udah dikali DifficultyScale
+        // Eksekusi pergerakan tikus
         transform.position = Vector2.MoveTowards(transform.position, targetPos, _enemy.MoveSpeed * Time.deltaTime);
 
-        // 5. CEK JARAK (Kalau udah deket, ganti waypoint)
+        // Cek jarak antar waypoint
         if (Vector2.Distance(transform.position, targetPos) < 0.1f)
         {
             _waypointIndex++;
 
-            // 6. CEK APA UDAH NYAMPE BASE LU
             if (_waypointIndex >= _waypoints.Length)
             {
-                _enemy.ReachedEnd(); // Kurangi nyawa player & balik ke pool
+                _enemy.ReachedEnd(); // Tikus masuk finish, nyawa kurang, balik ke pool
             }
         }
     }

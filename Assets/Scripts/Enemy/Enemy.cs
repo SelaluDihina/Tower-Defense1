@@ -15,6 +15,13 @@ public class Enemy : MonoBehaviour
     [Header("Audio Settings (Modular)")]
     [SerializeField] private AudioClip hitSound; 
 
+    // --- SUNTIKAN JALUR DUAL PATH (HARD MODE RUNTIME DATA) ---
+    private Transform[] _waypoints; // Menyimpan koordinat Transform hasil ekstrak Path
+    
+    // Property Read-Only agar EnemyMovement bisa mengambil rute jalan dari sini
+    public Transform[] Waypoints => _waypoints;
+    // -----------------------------------------------------------------
+
     private float _currentHealth;
     private float _moveSpeed;
     private float _baseSpeed;
@@ -29,6 +36,33 @@ public class Enemy : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
         if (_audioSource != null) _audioSource.playOnAwake = false;
     }
+
+    // --- FUNGSI DINAMIS: DIPANGGIL SPAWNER DETIK PERTAMA TIKUS LAHIR ---
+    public void SetPath(Path targetPath)
+    {
+        if (targetPath != null && targetPath.Waypoints != null && targetPath.Waypoints.Length > 0)
+        {
+            // Buat array baru berukuran sama dengan jumlah GameObject di dalam Path
+            _waypoints = new Transform[targetPath.Waypoints.Length];
+            
+            // Ekstrak komponen Transform dari tiap GameObject secara presisi
+            for (int i = 0; i < targetPath.Waypoints.Length; i++)
+            {
+                if (targetPath.Waypoints[i] != null)
+                {
+                    _waypoints[i] = targetPath.Waypoints[i].transform;
+                }
+            }
+
+            // Daftarkan ulang rute ke script pergerakan jika komponennya sudah aktif
+            EnemyMovement movement = GetComponent<EnemyMovement>();
+            if (movement != null)
+            {
+                movement.UpdateRuntimePath();
+            }
+        }
+    }
+    // ---------------------------------------------------------
 
     public void SetDifficultyScale(int waveIndex)
     {
@@ -46,7 +80,6 @@ public class Enemy : MonoBehaviour
 
     public void ApplySlow(float slowAmount, float duration)
     {
-        // --- CONSOLE LOG TOWER LEM ---
         Debug.Log($"<color=yellow>[TOWER LEM]</color> Musuh {gameObject.name} TERKENA SLOW! Speed turun ke: {1f - slowAmount}%");
 
         _moveSpeed = _baseSpeed * (1f - slowAmount);
@@ -98,7 +131,7 @@ public class Enemy : MonoBehaviour
             proj.gameObject.SetActive(false); 
         }
 
-        _isSlowed = false; // Reset state biar pool kaga glitch
+        _isSlowed = false; 
         gameObject.SetActive(false);
     }
 }

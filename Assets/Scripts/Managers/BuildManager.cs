@@ -21,6 +21,11 @@ public class BuildManager : MonoBehaviour
     public GameObject ghostPreview;
     private SpriteRenderer ghostRenderer;
     private Transform rangeIndicator;
+    // --- SUNTIKAN SAKTI HARD MODE (TIDAK MENGHAPUS KODE LAMA) ---
+    [SerializeField] private LayerMask grassLayer; // Kolom baru buat nampung layer "Node_Tower" lu
+    private Color validColor = new Color(0f, 1f, 0f, 0.4f);  // Hijau Transparan
+    private Color invalidColor = new Color(1f, 0f, 0f, 0.4f); // Merah Transparan
+    // ------------------------------------------------------------
     
     [Header("Tower Limits")]
     [SerializeField] private int maxTowers = 10; 
@@ -42,6 +47,22 @@ public class BuildManager : MonoBehaviour
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = -1f;
         ghostPreview.transform.position = mousePos;
+
+        // --- ARSITEKTUR DETEKSI LAYER TANAH (SUNTIKAN BARU TANPA HAPUS) ---
+        // Tembakkan sinar 2D dari koordinat mouse untuk ngecek kasta layer tanah bebas lu
+        RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero, 0f, grassLayer);
+
+        if (hit.collider != null)
+        {
+            // Jika mengenai objek yang memiliki Layer "Node_Tower" (Legal/Bisa dibangun)
+            ghostRenderer.color = validColor;
+        }
+        else
+        {
+            // Jika mengenai aspal orange atau area kosong luar map (Ilegal/Gak bisa dibangun)
+            ghostRenderer.color = invalidColor;
+        }
+        // ------------------------------------------------------------------
 
         if (Input.GetMouseButtonDown(1))
             CancelSelection();

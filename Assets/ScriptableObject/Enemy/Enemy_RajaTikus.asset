@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Enemy_RajaTikus
   m_EditorClassIdentifier: 
   enemyType: 0
-  lives: 1000
+  lives: 800
   damage: 3
   speed: 1
-  goldReward: 100
+  goldReward: 50
