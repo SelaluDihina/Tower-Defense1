@@ -20,7 +20,7 @@ public class Enemy : MonoBehaviour
     
     // Property Read-Only agar EnemyMovement bisa mengambil rute jalan dari sini
     public Transform[] Waypoints => _waypoints;
-    // -----------------------------------------------------------------
+    // ------------------------------------------------------------------
 
     private float _currentHealth;
     private float _moveSpeed;
@@ -37,32 +37,14 @@ public class Enemy : MonoBehaviour
         if (_audioSource != null) _audioSource.playOnAwake = false;
     }
 
-    // --- FUNGSI DINAMIS: DIPANGGIL SPAWNER DETIK PERTAMA TIKUS LAHIR ---
+    // --- REVISI SAKTI PEMBERSIHAN TOTAL (TIDAK MERUSAK SPAWNER) ---
+    // Kita biarkan fungsi ini kosong polosan tanpa memanggil UpdateRuntimePath() yang bikin bug,
+    // karena tugas pergerakan mutlak diatur secara elegan dari Spawner langsung ke EnemyMovement!
     public void SetPath(Path targetPath)
     {
-        if (targetPath != null && targetPath.Waypoints != null && targetPath.Waypoints.Length > 0)
-        {
-            // Buat array baru berukuran sama dengan jumlah GameObject di dalam Path
-            _waypoints = new Transform[targetPath.Waypoints.Length];
-            
-            // Ekstrak komponen Transform dari tiap GameObject secara presisi
-            for (int i = 0; i < targetPath.Waypoints.Length; i++)
-            {
-                if (targetPath.Waypoints[i] != null)
-                {
-                    _waypoints[i] = targetPath.Waypoints[i].transform;
-                }
-            }
-
-            // Daftarkan ulang rute ke script pergerakan jika komponennya sudah aktif
-            EnemyMovement movement = GetComponent<EnemyMovement>();
-            if (movement != null)
-            {
-                movement.UpdateRuntimePath();
-            }
-        }
+        // Kosong polosan demi keamanan kasta tertinggi alur data!
     }
-    // ---------------------------------------------------------
+    // -----------------------------------------------------------------
 
     public void SetDifficultyScale(int waveIndex)
     {

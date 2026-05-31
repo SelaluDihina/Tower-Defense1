@@ -169,6 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 427190186}
+  tower: {fileID: 0}
 --- !u!61 &14361074
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -729,6 +730,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 2065359442}
+  tower: {fileID: 0}
 --- !u!61 &118926818
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1037,6 +1039,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 1853631262}
+  tower: {fileID: 0}
 --- !u!61 &153798280
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1129,6 +1132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 456315293}
+  tower: {fileID: 0}
 --- !u!61 &190915892
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1221,6 +1225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 1631691051}
+  tower: {fileID: 0}
 --- !u!61 &201560106
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1313,6 +1318,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 1393776072}
+  tower: {fileID: 0}
 --- !u!61 &206749636
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1795,6 +1801,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 1100899753}
+  tower: {fileID: 0}
 --- !u!61 &241866241
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2569,6 +2576,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 371543179}
+  tower: {fileID: 0}
 --- !u!61 &308298881
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2730,6 +2738,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 1367202187}
+  tower: {fileID: 0}
 --- !u!61 &320545279
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2972,6 +2981,9 @@ MonoBehaviour:
   towerPrefab: {fileID: 1512994855176913717, guid: 76fa1ebc60fa81444a9a5364a34a4d49, type: 3}
   towerData: {fileID: 11400000, guid: 64e4d7a0531be4e48828414781781fcb, type: 2}
   ghostPreview: {fileID: 816074416}
+  grassLayer:
+    serializedVersion: 2
+    m_Bits: 192
   maxTowers: 10
 --- !u!4 &360140266
 Transform:
@@ -3129,6 +3141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 1245924212}
+  tower: {fileID: 0}
 --- !u!61 &406757945
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3221,6 +3234,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 1735330407}
+  tower: {fileID: 0}
 --- !u!61 &410201509
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3556,7 +3570,7 @@ Transform:
   m_GameObject: {fileID: 434898931}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.02, y: -0.03, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3780,6 +3794,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 454590235}
+  tower: {fileID: 0}
 --- !u!61 &475629542
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4170,6 +4185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 239194504}
+  tower: {fileID: 0}
 --- !u!61 &517204690
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4678,6 +4694,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 1808384616}
+  tower: {fileID: 0}
 --- !u!61 &563546671
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4831,6 +4848,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 422605560}
+  tower: {fileID: 0}
 --- !u!61 &576302141
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4923,6 +4941,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 2063334900}
+  tower: {fileID: 0}
 --- !u!61 &594964256
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5311,6 +5330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 1797472472}
+  tower: {fileID: 0}
 --- !u!61 &618364464
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5485,6 +5505,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 928059291}
+  tower: {fileID: 0}
 --- !u!61 &659521774
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5577,6 +5598,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 1253077622}
+  tower: {fileID: 0}
 --- !u!61 &662234663
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5837,6 +5859,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 1386846709}
+  tower: {fileID: 0}
 --- !u!61 &677873020
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5929,6 +5952,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 1017245621}
+  tower: {fileID: 0}
 --- !u!61 &687466776
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6105,6 +6129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 1344327542}
+  tower: {fileID: 0}
 --- !u!61 &730318510
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6426,6 +6451,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 615909348}
+  tower: {fileID: 0}
 --- !u!61 &811151361
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6634,7 +6660,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 50
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0.39215687}
   m_FlipX: 0
@@ -6693,6 +6719,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 544647780}
+  tower: {fileID: 0}
 --- !u!61 &822695064
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6939,6 +6966,8 @@ MonoBehaviour:
   biasaPool: {fileID: 1188566034}
   lincahPool: {fileID: 482424467}
   rajaPool: {fileID: 1473608581}
+  pathAtas: {fileID: 0}
+  pathBawah: {fileID: 0}
 --- !u!4 &854968814
 Transform:
   m_ObjectHideFlags: 0
@@ -7280,6 +7309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 1928714399}
+  tower: {fileID: 0}
 --- !u!61 &904505931
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7456,6 +7486,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 665368051}
+  tower: {fileID: 0}
 --- !u!61 &934064819
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7716,6 +7747,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 665827464}
+  tower: {fileID: 0}
 --- !u!61 &1005348330
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7808,6 +7840,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 830298096}
+  tower: {fileID: 0}
 --- !u!61 &1015357390
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7984,6 +8017,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 105972443}
+  tower: {fileID: 0}
 --- !u!61 &1038535276
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8450,6 +8484,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 609473157}
+  tower: {fileID: 0}
 --- !u!61 &1134504082
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8626,6 +8661,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 1000910923}
+  tower: {fileID: 0}
 --- !u!61 &1139533471
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8889,6 +8925,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 1927661178}
+  tower: {fileID: 0}
 --- !u!61 &1206214223
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8981,6 +9018,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 274624868}
+  tower: {fileID: 0}
 --- !u!61 &1212546520
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -9073,6 +9111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 1240479754}
+  tower: {fileID: 0}
 --- !u!61 &1215238830
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -9669,6 +9708,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 1218334863}
+  tower: {fileID: 0}
 --- !u!61 &1248852828
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -10650,6 +10690,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 1112708177}
+  tower: {fileID: 0}
 --- !u!61 &1323428180
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -10974,6 +11015,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 1227856169}
+  tower: {fileID: 0}
 --- !u!61 &1352309629
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11066,6 +11108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 59137049}
+  tower: {fileID: 0}
 --- !u!61 &1366120430
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11242,6 +11285,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 767369572}
+  tower: {fileID: 0}
 --- !u!61 &1382549739
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11634,6 +11678,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 53851297}
+  tower: {fileID: 0}
 --- !u!61 &1422391549
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11726,6 +11771,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 1469301440}
+  tower: {fileID: 0}
 --- !u!61 &1444401010
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11818,6 +11864,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 2111846608}
+  tower: {fileID: 0}
 --- !u!61 &1450120940
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11910,6 +11957,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 1288565850}
+  tower: {fileID: 0}
 --- !u!61 &1456684168
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12209,6 +12257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 512937514}
+  tower: {fileID: 0}
 --- !u!61 &1474204709
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12454,6 +12503,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 1094537046}
+  tower: {fileID: 0}
 --- !u!61 &1491266362
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12546,6 +12596,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 320607158}
+  tower: {fileID: 0}
 --- !u!61 &1509650711
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12722,6 +12773,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 1002691405}
+  tower: {fileID: 0}
 --- !u!61 &1542083546
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12824,6 +12876,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 481374233}
+  tower: {fileID: 0}
 --- !u!61 &1547219341
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12916,6 +12969,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 1814242004}
+  tower: {fileID: 0}
 --- !u!61 &1550421940
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -13008,6 +13062,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 887881926}
+  tower: {fileID: 0}
 --- !u!61 &1558764934
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -13100,6 +13155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 851769664}
+  tower: {fileID: 0}
 --- !u!61 &1569958753
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -13276,6 +13332,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 1658045156}
+  tower: {fileID: 0}
 --- !u!61 &1620650789
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -13452,6 +13509,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 1935545120}
+  tower: {fileID: 0}
 --- !u!61 &1633905390
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -13554,6 +13612,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 431177289}
+  tower: {fileID: 0}
 --- !u!61 &1650818073
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -13715,6 +13774,10 @@ MonoBehaviour:
   nodePrefab: {fileID: 6299464067501744750, guid: b12948672cb6c3d43a56d5a894da5cab, type: 3}
   gridSize: {x: 20, y: 12}
   spacing: 1
+  ghostPreview: {fileID: 0}
+  grassLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!4 &1669675526
 Transform:
   m_ObjectHideFlags: 0
@@ -13847,6 +13910,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 254358019}
+  tower: {fileID: 0}
 --- !u!61 &1682049847
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -14640,6 +14704,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 1228087965}
+  tower: {fileID: 0}
 --- !u!61 &1741008143
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -14803,6 +14868,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 513635074}
+  tower: {fileID: 0}
 --- !u!61 &1785909329
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -15790,6 +15856,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 780573903}
+  tower: {fileID: 0}
 --- !u!61 &1869366066
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -15882,6 +15949,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 899101625}
+  tower: {fileID: 0}
 --- !u!61 &1871222163
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -15974,6 +16042,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 888397329}
+  tower: {fileID: 0}
 --- !u!61 &1876973759
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -16066,6 +16135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 147077803}
+  tower: {fileID: 0}
 --- !u!61 &1897648789
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -16158,6 +16228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 1135407681}
+  tower: {fileID: 0}
 --- !u!61 &1902561217
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -16325,6 +16396,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 1530975437}
+  tower: {fileID: 0}
 --- !u!61 &1915299007
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -16511,6 +16583,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 529916048}
+  tower: {fileID: 0}
 --- !u!61 &1928321555
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -16603,6 +16676,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 1217591602}
+  tower: {fileID: 0}
 --- !u!61 &1928559618
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -17062,6 +17136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 291885782}
+  tower: {fileID: 0}
 --- !u!61 &2015391625
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -17154,6 +17229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 698587917}
+  tower: {fileID: 0}
 --- !u!61 &2039834440
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -19717,6 +19793,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 1593616409}
+  tower: {fileID: 0}
 --- !u!61 &2099267683
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -19964,6 +20041,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 1345133502}
+  tower: {fileID: 0}
 --- !u!61 &2131610734
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -20056,6 +20134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerIcon: {fileID: 1787309138}
+  tower: {fileID: 0}
 --- !u!61 &2142182713
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -20180,11 +20259,11 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 434898933}
   - {fileID: 1821326656}
   - {fileID: 314909056}
   - {fileID: 854968814}
   - {fileID: 1339622958}
-  - {fileID: 434898933}
   - {fileID: 360140266}
   - {fileID: 1697997844}
   - {fileID: 1704983467}

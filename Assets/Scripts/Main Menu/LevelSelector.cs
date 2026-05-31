@@ -8,8 +8,13 @@ public class LevelSelector : MonoBehaviour
     // Variabel ini WAJIB bertipe public atau memiliki [SerializeField] agar nongol di Inspector Canvas
     [SerializeField] private Button[] levelButtons;
 
-    private void Start()
+private void Start()
     {
+        // --- SUNTIKAN SAKTI TESTING (HARD MODE HACK) ---
+        // Paksa registry laptop lu untuk membuka sampai level 3 demi kebutuhan debug/testing
+        PlayerPrefs.SetInt("levelReached", 3); 
+        // -----------------------------------------------
+
         // Ambil data progress level lokal dari registry laptop lu
         int levelReached = PlayerPrefs.GetInt("levelReached", 1);
 
@@ -20,6 +25,11 @@ public class LevelSelector : MonoBehaviour
             {
                 // Matikan fungsi klik tombol level yang belum terbuka
                 levelButtons[i].interactable = false;
+            }
+            else
+            {
+                // Pengaman: Pastikan tombol yang sudah terbuka bisa diklik dengan lancar
+                levelButtons[i].interactable = true;
             }
         }
     }

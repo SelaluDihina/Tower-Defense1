@@ -39,35 +39,60 @@ public class Spawner : MonoBehaviour
             return;
         }
 
+        // ==================================================================
+        // --- STEP 1: TELEPORTASI AWAL (WAJIB PALING ATAS!) ---
+        // Pindahkan posisi fisik objek dari pool ke koordinat Spawner detik ini juga,
+        // sebelum algoritma SetPath mengunci koordinat Waypoint pertama!
+        // ==================================================================
         obj.transform.position = transform.position;
 
-        Enemy e = obj.GetComponent<Enemy>();
-        if (e != null) e.SetDifficultyScale(waveIndex);
+        // --- HARD MODE EXPLANATION (MENDALAM TIAP BARIS) ---
+        // 2. Ambil komponen pergerakan tikus secara presisi dari pool
+        EnemyMovement movement = obj.GetComponent<EnemyMovement>();
 
-        // --- ARSITEKTUR PENENTUAN JALUR ACAK TIKUS (SUNTIKAN BARU) ---
-        // Kita cek apakah kedua script bapak jalan ini udah lu colok di Inspector
-        if (pathAtas != null && pathBawah != null)
+        if (movement != null)
         {
-            // Ambil komponen pergerakan tikus (biasanya nempel bareng script Enemy atau script terpisah)
-            // Sesuai kodingan lu, kita coba ambil script EnemyMovement (sesuaikan nama class movement lu jika berbeda)
-            EnemyMovement movement = obj.GetComponent<EnemyMovement>();
-            
-            if (movement != null)
+            // OPSI A: LOGIKA DUAL PATH (LEVEL 2)
+            // Jika slot Inspector pathAtas dan pathBawah terisi, jalankan pembagian kasta jalur acak 50:50
+            if (pathAtas != null && pathBawah != null)
             {
-                // Menggunakan fungsi acak bawaan Unity (0.0 sampai 1.0)
-                // Jika angka keluar di atas 0.5f (50% peluang), tikus dipaksa lewat Kasta Atas
                 if (UnityEngine.Random.value > 0.5f)
                 {
-                    e.SetPath(pathAtas);
+                    // Kirim komponen Transform dari kelas PathAtas ke script pergerakan tikus
+                    movement.SetPath(pathAtas.transform); 
                 }
-                else // 50% peluang sisanya, tikus dipaksa lewat Kasta Bawah
+                else
                 {
-                    e.SetPath(pathBawah);
+                    // Kirim komponen Transform dari kelas PathBawah ke script pergerakan tikus
+                    movement.SetPath(pathBawah.transform); 
+                }
+            }
+            // OPSI B: LOGIKA FALLBACK SINGLE PATH (LEVEL 1)
+            // Jika slot di Inspector kosong, otomatis cari objek tunggal bernama "Path1" di dalam runtime scene
+            else
+            {
+                GameObject pathObj = GameObject.Find("Path1");
+                if (pathObj != null)
+                {
+                    // Ambil komponen Transform induk utama milik Path1 untuk dibedah anaknya
+                    movement.SetPath(pathObj.transform);
+                }
+                else
+                {
+                    Debug.LogError("Gagal Spawn! Jalur Level 2 kosong, dan objek 'Path1' Level 1 tidak ditemukan di Scene!");
                 }
             }
         }
-        // ------------------------------------------------------------------
+        else
+        {
+            Debug.LogWarning($"Objek {obj.name} tidak memiliki komponen EnemyMovement!");
+        }
 
+        // 3. Set tingkat kekerasan (scaling darah/speed) tikus berdasarkan indeks Wave saat ini
+        Enemy e = obj.GetComponent<Enemy>();
+        if (e != null) e.SetDifficultyScale(waveIndex);
+
+        // 4. AKTIFKAN OBJEK: Tikus keluar ke world map dalam kondisi posisi, jalur, dan skala data yang sudah final dan legal!
         obj.SetActive(true);
 
         Debug.Log($"<color=green>SPAWN: {type} | Wave {waveIndex + 1}</color>");

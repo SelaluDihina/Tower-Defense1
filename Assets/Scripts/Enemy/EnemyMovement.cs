@@ -1,3 +1,4 @@
+// --- KODE REKONSILIASI KASTA SUCI (BALIK KE SETELAN AWAL LU YANG LURUS) ---
 using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
@@ -11,81 +12,62 @@ public class EnemyMovement : MonoBehaviour
         _enemy = GetComponent<Enemy>();
     }
 
-    // Fungsi cerdik buat ngecek ketersediaan jalur di setiap level
-    public void UpdateRuntimePath()
+    // Fungsi pengoper jalur dari Spawner tanpa merusak urutan asli Hierarchy lu yang udah rapi!
+    public void SetPath(Transform pathTransform)
     {
-        // 1. LOGIKA LEVEL 2: Kalau Enemy punya data jalur dinamis atas/bawah dari Spawner
-        if (_enemy != null && _enemy.Waypoints != null && _enemy.Waypoints.Length > 0)
-        {
-            _waypoints = _enemy.Waypoints;
-            _waypointIndex = 0;
+        if (pathTransform == null) return;
 
-            if (_waypoints[0] != null)
-            {
-                transform.position = _waypoints[0].position;
-            }
-        }
-        // 2. LOGIKA LEVEL 1 (SOLUSI TABRAKAN): Kalo data atas/bawah kosong, otomatis cari "Path1" tunggal!
-        else
+        // 1. Ambil anak sesuai urutan asli Hierarchy lu (karena emang dari awal udah lurus terus!)
+        _waypoints = new Transform[pathTransform.childCount];
+        for (int i = 0; i < pathTransform.childCount; i++)
         {
-            GameObject pathObj = GameObject.Find("Path1");
-            if (pathObj != null)
-            {
-                _waypoints = new Transform[pathObj.transform.childCount];
-                for (int i = 0; i < pathObj.transform.childCount; i++)
-                {
-                    _waypoints[i] = pathObj.transform.GetChild(i);
-                }
-                
-                _waypointIndex = 0;
-                
-                if (_waypoints.Length > 0 && _waypoints[0] != null)
-                {
-                    transform.position = _waypoints[0].position;
-                }
-            }
+            _waypoints[i] = pathTransform.GetChild(i);
+        }
+
+        // 2. Reset index ke titik start awal jalur
+        _waypointIndex = 0;
+
+        // 3. Langsung kunci posisi awal tikus di belokan pertama biar gak lompat-lompat rute
+        if (_waypoints.Length > 0 && _waypoints[0] != null)
+        {
+            transform.position = _waypoints[0].position;
         }
     }
 
     void OnEnable()
     {
-        _waypointIndex = 0; 
-        // Deteksi jalur langsung pas tikus keluar dari Object Pooler
-        UpdateRuntimePath();
+        // Biarkan kosong total! JANGAN panggil UpdateRuntimePath ampas lagi biar gak amnesia!
     }
 
     void Update()
     {
-        // Pengaman darurat: kalo di frame awal datanya sempat miss, paksa cari lagi
-        if (_waypoints == null || _waypoints.Length == 0)
-        {
-            UpdateRuntimePath();
-            return;
-        }
-
+        // Pengaman: Kalo data jalur belum masuk, jangan jalan dulu
+        if (_waypoints == null || _waypoints.Length == 0) return;
         if (_waypointIndex >= _waypoints.Length) return;
         if (_waypoints[_waypointIndex] == null) return;
 
-        // Tentukan koordinat target
+        // Ambil target koordinat belokan berikutnya
         Vector3 targetPos = _waypoints[_waypointIndex].position;
 
-        // --- LOGIKA ROTASI HADAP TIKUS (Pertahankan Kode Asli Lu) ---
+        // --- LOGIKA ROTASI HADAP TIKUS ---
         Vector3 direction = targetPos - transform.position;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        // -------------------------------------------------------------
+        if (direction != Vector3.zero)
+        {
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        }
 
-        // Eksekusi pergerakan tikus
+        // Jalankan fisik tikus maju lurus searah ke target
         transform.position = Vector2.MoveTowards(transform.position, targetPos, _enemy.MoveSpeed * Time.deltaTime);
 
-        // Cek jarak antar waypoint
+        // Cek jarak, kalau udah nyampe belokan, ganti target ke belokan berikutnya
         if (Vector2.Distance(transform.position, targetPos) < 0.1f)
         {
             _waypointIndex++;
 
             if (_waypointIndex >= _waypoints.Length)
             {
-                _enemy.ReachedEnd(); // Tikus masuk finish, nyawa kurang, balik ke pool
+                _enemy.ReachedEnd(); // Masuk finish, balik ke pooler
             }
         }
     }

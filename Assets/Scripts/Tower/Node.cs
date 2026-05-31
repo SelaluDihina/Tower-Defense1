@@ -5,8 +5,7 @@ public class Node : MonoBehaviour
     [Header("Visual Link")]
     [SerializeField] private GameObject hammerIcon; 
 
-    private GameObject tower;
-
+    [HideInInspector] public GameObject tower;
     void OnMouseDown()
     {
         Debug.Log("<color=green>● [NODE] Klik masuk ke: </color>" + gameObject.name);

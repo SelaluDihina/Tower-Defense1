@@ -21,15 +21,14 @@ public class BuildManager : MonoBehaviour
     public GameObject ghostPreview;
     private SpriteRenderer ghostRenderer;
     private Transform rangeIndicator;
-    // --- SUNTIKAN SAKTI HARD MODE (TIDAK MENGHAPUS KODE LAMA) ---
-    [SerializeField] private LayerMask grassLayer; // Kolom baru buat nampung layer "Node_Tower" lu
-    private Color validColor = new Color(0f, 1f, 0f, 0.4f);  // Hijau Transparan
-    private Color invalidColor = new Color(1f, 0f, 0f, 0.4f); // Merah Transparan
-    // ------------------------------------------------------------
+    
+    [SerializeField] private LayerMask grassLayer; 
+    private Color validColor = new Color(0f, 1f, 0f, 0.4f);  
+    private Color invalidColor = new Color(1f, 0f, 0f, 0.4f); 
     
     [Header("Tower Limits")]
     [SerializeField] private int maxTowers = 10; 
-    private int _currentTowerCount = 0; // Variabel internal buat ngitung tower
+    private int _currentTowerCount = 0; 
 
     private void Awake()
     {
@@ -41,31 +40,89 @@ public class BuildManager : MonoBehaviour
         ghostPreview.SetActive(false);
     }
 
+    // --- FUNGSI SINKRONISASI WARNA (KASTA DEWA OOP) ---
+    private void SetPreviewColor(Color newColor)
+    {
+        // Ubah warna tower kecil
+        ghostRenderer.color = newColor;
+        
+        // Ubah juga warna lingkaran jangkauannya secara bersamaan!
+        if (rangeIndicator != null)
+        {
+            SpriteRenderer circleRenderer = rangeIndicator.GetComponent<SpriteRenderer>();
+            if (circleRenderer != null) circleRenderer.color = newColor;
+        }
+    }
+
     private void Update()
     {
         if (ghostPreview == null || !ghostPreview.activeSelf) return;
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePos.z = -1f;
-        ghostPreview.transform.position = mousePos;
 
-        // --- ARSITEKTUR DETEKSI LAYER TANAH (SUNTIKAN BARU TANPA HAPUS) ---
-        // Tembakkan sinar 2D dari koordinat mouse untuk ngecek kasta layer tanah bebas lu
-        RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero, 0f, grassLayer);
+        // Netralkan distorsi Z kamera
+        Vector3 rawMousePos = Input.mousePosition;
+        rawMousePos.z = Mathf.Abs(Camera.main.transform.position.z); 
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(rawMousePos);
+        mousePos.z = 0f; 
+
+        ghostPreview.transform.position = new Vector3(mousePos.x, mousePos.y, -1f);
+
+        RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero, 0f);
 
         if (hit.collider != null)
         {
-            // Jika mengenai objek yang memiliki Layer "Node_Tower" (Legal/Bisa dibangun)
-            ghostRenderer.color = validColor;
+            // 1. BLOKIR MUTLAK AREA JALAN MUSUH (ASPAL/PATH)
+            if (hit.collider.name.Contains("Aspal") || hit.collider.name.Contains("Path") || hit.collider.name.Contains("Jalan"))
+            {
+                SetPreviewColor(invalidColor); // Sinkronisasi: Tower & Lingkaran jadi MERAH!
+                return; 
+            }
+
+            Node node = hit.collider.GetComponent<Node>();
+            
+            // 2. KASTA LEVEL 1 (Petak Kayu Node)
+            if (node != null)
+            {
+                if (node.tower == null) SetPreviewColor(validColor);
+                else SetPreviewColor(invalidColor);
+                
+                ghostPreview.transform.position = new Vector3(node.transform.position.x, node.transform.position.y, -1f);
+            }
+            // 3. KASTA LEVEL 2 (Tanah Raksasa Tilemap)
+            else if (hit.collider.name.Contains("Grid") || hit.collider.name.Contains("Tanah") || hit.collider.gameObject.layer == LayerMask.NameToLayer("TanahBangun"))
+            {
+                float snapX = Mathf.Floor(mousePos.x) + 0.5f;
+                float snapY = Mathf.Floor(mousePos.y) + 0.5f;
+                Vector3 snapPos = new Vector3(snapX, snapY, -1f);
+                
+                // Radar Anti-Tumpuk
+                Collider2D[] overlaps = Physics2D.OverlapCircleAll(new Vector2(snapX, snapY), 0.2f);
+                bool areaPenuh = false;
+
+                foreach (var col in overlaps)
+                {
+                    if (col.gameObject != hit.collider.gameObject && !col.isTrigger)
+                    {
+                        areaPenuh = true; 
+                        break; 
+                    }
+                }
+
+                if (!areaPenuh) SetPreviewColor(validColor);
+                else SetPreviewColor(invalidColor);
+
+                ghostPreview.transform.position = snapPos;
+            }
+            else
+            {
+                SetPreviewColor(invalidColor);
+            }
         }
         else
         {
-            // Jika mengenai aspal orange atau area kosong luar map (Ilegal/Gak bisa dibangun)
-            ghostRenderer.color = invalidColor;
+            SetPreviewColor(invalidColor);
         }
-        // ------------------------------------------------------------------
 
-        if (Input.GetMouseButtonDown(1))
-            CancelSelection();
+        if (Input.GetMouseButtonDown(1)) CancelSelection();
     }
 
     public void Button_PilihGarpu() => SelectTowerToBuild(garpuPrefab, garpuData);
@@ -80,10 +137,8 @@ public class BuildManager : MonoBehaviour
         if (ghostPreview == null) return;
         ghostPreview.SetActive(true);
         SpriteRenderer prefabSR = prefab.GetComponent<SpriteRenderer>();
-        if (prefabSR != null)
-            ghostRenderer.sprite = prefabSR.sprite;
+        if (prefabSR != null) ghostRenderer.sprite = prefabSR.sprite;
         UpdateRangeIndicator(data.range);
-        Debug.Log($"<color=cyan>SIAAP! {data.name} dipilih.</color>");
     }
 
     public void CancelSelection()
@@ -93,34 +148,20 @@ public class BuildManager : MonoBehaviour
         towerData = null;
     }
 
-    // LOGIKA MEMBANGUN UTAMA
     public GameObject BuildTowerOn(Node node)
     {
         if (towerPrefab == null || towerData == null) return null;
-
-        // CEK LIMIT: Stop pembangunan kalau sudah mencapai maxTowers
-        if (_currentTowerCount >= maxTowers)
-        {
-            Debug.Log("<color=red>LIMIT! Tower udah 10, Riz! Jangan maruk!</color>");
-            return null;
-        }
-
-        if (PlayerStats.Money < towerData.cost)
-        {
-            Debug.Log("<color=red>MISKIN! Duit kurang!</color>");
-            return null;
-        }
+        if (_currentTowerCount >= maxTowers) return null;
+        if (PlayerStats.Money < towerData.cost) return null;
 
         PlayerStats.Money -= towerData.cost;
-        _currentTowerCount++; // Tambah hitungan tower SETELAH pengecekan lolos
+        _currentTowerCount++; 
 
         Vector3 spawnPos = new Vector3(node.transform.position.x, node.transform.position.y, -1f);
-        GameObject tower = Instantiate(towerPrefab, spawnPos, Quaternion.identity);
-
-        Debug.Log($"<color=yellow>BOOM! {towerData.name} ke-{_currentTowerCount} BERHASIL!</color>");
+        Instantiate(towerPrefab, spawnPos, Quaternion.identity);
 
         CancelSelection();
-        return tower;
+        return towerPrefab; // Hanya untuk return GameObject jika diminta node
     }
 
     private void UpdateRangeIndicator(float range)
